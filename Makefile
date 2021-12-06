@@ -4,6 +4,9 @@ OUT_DIR := html
 html_src := index.html header.html
 html_dst := $(foreach html,$(html_src),$(OUT_DIR)/$(notdir $(html)))
 
+js_src := highlight-hover.js
+js_dst := $(foreach $(js),$(js_src),$(OUT_DIR)/$(js))
+
 agda_src := $(wildcard $(SRC_DIR)/*.lagda.md)
 agda_dst := $(patsubst $(SRC_DIR)/%.lagda.md,$(OUT_DIR)/%.md,$(agda_src))
 
@@ -15,7 +18,6 @@ fonts_dst := $(foreach font,$(fonts_src),$(OUT_DIR)/fonts/$(notdir $(font)))
 
 styles_src := $(wildcard styles/*.css)
 styles_dst := $(foreach style,$(styles_src),$(OUT_DIR)/$(notdir $(style)))
-
 
 AGDA := agda
 AGDA_FLAGS := \
@@ -34,7 +36,7 @@ PANDOC_FLAGS := \
 	--include-in-header=header.html
 
 .PHONY: all
-all: $(html_dst) $(agda_dst) $(styles_dst) $(fonts_dst)
+all: $(html_dst) $(js_dst) $(agda_dst) $(styles_dst) $(fonts_dst)
 
 $(OUT_DIR)/%.md: $(SRC_DIR)/%.lagda.md
 	$(AGDA) $(AGDA_FLAGS) $<
@@ -57,3 +59,7 @@ $(OUT_DIR)/header.html: header.html
 $(OUT_DIR)/index.html: index.md
 	@mkdir -p $(OUT_DIR)
 	$(PANDOC) $(PANDOC_FLAGS) -o $@ $<
+
+$(OUT_DIR)/%.js: %.js
+	@mkdir -p $(OUT_DIR)
+	cp $< $@
