@@ -18,6 +18,10 @@ or
        On the cache page, go to "Settings → Auth Tokens" and create a new write token.
 3. [ ] On the GitHub repository page, go to "Settings → Secrets → New repository secret" and add `CACHIX_AUTH_TOKEN`.
        Set its value to the secret you created in the previous step.
+4. [ ] Open the GitHub Actions workflow file `.github/workflows/github-pages.yml` in an editor and update the value of the `cachix-action` parameter `name` to the name of your cache.
+       Commit your change.
+5. [ ] After the GitHub Actions "Deploy" job is green, on the GitHub repository page, go to "Settings → Pages".
+       Select "Source: gh-pages".
 
 ## Compile HTML
 
