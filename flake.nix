@@ -11,7 +11,7 @@
       rec {
         defaultPackage = packages.agda-template;
         packages = {
-          wolverian-agda-template = pkgs.runCommand "agda-template"
+          agda-template = pkgs.runCommand "agda-template"
             {
               buildInputs = [
                 pkgs.gnumake
