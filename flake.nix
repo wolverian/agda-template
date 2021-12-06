@@ -9,9 +9,9 @@
       let pkgs = nixpkgs.legacyPackages.${system};
       in
       rec {
-        defaultPackage = packages.wolverian-agda-template;
+        defaultPackage = packages.agda-template;
         packages = {
-          wolverian-agda-template = pkgs.runCommand "wolverian-agda-template"
+          wolverian-agda-template = pkgs.runCommand "agda-template"
             {
               buildInputs = [
                 pkgs.gnumake
@@ -27,7 +27,7 @@
               ln -s ${./Makefile} Makefile
               ln -s ${./agda-template.agda-lib} agda-template.agda-lib
               mkdir src && ln -s ${./src}/*.lagda.md src
-              ${pkgs.gnumake}/bin/make OUTPUT_DIR=$out
+              ${pkgs.gnumake}/bin/make OUT_DIR=$out
             '';
         };
         checks = {

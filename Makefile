@@ -1,12 +1,28 @@
 SRC_DIR := src
-OUTPUT_DIR := html
+OUT_DIR := html
+
+html_src := index.html header.html
+html_dst := $(foreach html,$(html_src),$(OUT_DIR)/$(notdir $(html)))
+
+agda_src := $(wildcard $(SRC_DIR)/*.lagda.md)
+agda_dst := $(patsubst $(SRC_DIR)/%.lagda.md,$(OUT_DIR)/%.md,$(agda_src))
+
+md_src := $(agda_dst)
+md_dst := $(patsubst %.md,%.html,$(md_src))
+
+fonts_src := $(wildcard fonts/*.otf)
+fonts_dst := $(foreach font,$(fonts_src),$(OUT_DIR)/fonts/$(notdir $(font)))
+
+styles_src := $(wildcard styles/*.css)
+styles_dst := $(foreach style,$(styles_src),$(OUT_DIR)/$(notdir $(style)))
+
 
 AGDA := agda
 AGDA_FLAGS := \
 	--html \
 	--html-highlight=auto \
 	--highlight-occurrences \
-	--html-dir=$(OUTPUT_DIR)
+	--html-dir=$(OUT_DIR)
 
 PANDOC := pandoc
 PANDOC_FLAGS := \
@@ -14,42 +30,30 @@ PANDOC_FLAGS := \
 	--standalone \
 	--section-divs \
 	--katex \
-	--css=pandoc.css \
-	--css=style.css \
+	$(foreach s,$(styles_src),--css=$(notdir $(s))) \
 	--include-in-header=header.html
 
-FONTS_SRC := $(wildcard fonts/*.otf)
-FONTS_DST := $(foreach font,$(FONTS_SRC),$(OUTPUT_DIR)/fonts/$(notdir $(font)))
-
-STYLES_SRC := $(wildcard styles/*.css)
-STYLES_DST := $(foreach style,$(STYLES_SRC),$(OUTPUT_DIR)/$(notdir $(style)))
-
 .PHONY: all
-all: \
-	$(OUTPUT_DIR)/index.html \
-	$(OUTPUT_DIR)/header.html \
-	$(OUTPUT_DIR)/UCC.html \
-	$(STYLES_DST) \
-	$(FONTS_DST)
+all: $(html_dst) $(agda_dst) $(styles_dst) $(fonts_dst)
 
-$(OUTPUT_DIR)/%.md: $(SRC_DIR)/%.lagda.md
+$(OUT_DIR)/%.md: $(SRC_DIR)/%.lagda.md
 	$(AGDA) $(AGDA_FLAGS) $<
 
-$(OUTPUT_DIR)/%.html: $(OUTPUT_DIR)/%.md $(STYLES_DST) $(FONTS_DST)
+$(OUT_DIR)/%.html: $(OUT_DIR)/%.md $(styles_dst) $(fonts_dst)
 	$(PANDOC) $(PANDOC_FLAGS) -o $@ $<
 
-$(OUTPUT_DIR)/fonts/%.otf: fonts/%.otf
-	@mkdir -p $(OUTPUT_DIR)/fonts
+$(OUT_DIR)/fonts/%.otf: fonts/%.otf
+	@mkdir -p $(OUT_DIR)/fonts
 	cp $< $@
 
-$(OUTPUT_DIR)/%.css: styles/%.css
-	@mkdir -p $(OUTPUT_DIR)
+$(OUT_DIR)/%.css: styles/%.css
+	@mkdir -p $(OUT_DIR)
 	cp $< $@
 
-$(OUTPUT_DIR)/header.html: header.html
-	@mkdir -p $(OUTPUT_DIR)
+$(OUT_DIR)/header.html: header.html
+	@mkdir -p $(OUT_DIR)
 	cp $< $@
 
-$(OUTPUT_DIR)/index.html: index.md
-	@mkdir -p $(OUTPUT_DIR)
+$(OUT_DIR)/index.html: index.md
+	@mkdir -p $(OUT_DIR)
 	$(PANDOC) $(PANDOC_FLAGS) -o $@ $<
