@@ -1,0 +1,29 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cachix/install-nix-action@v15
+      - uses: cachix/cachix-action@v10
+        with:
+          name: wolverian-agda-template
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Build HTML
+        run: nix build --verbose --print-build-logs
+      - name: Copy HTML so the next step can read it
+        run: cp -vHR result html
+      - name: GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2.5.0
+        with:
+          build_dir: html
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
