@@ -36,7 +36,7 @@ PANDOC_FLAGS := \
 	--include-in-header=header.html
 
 .PHONY: all
-all: $(html_dst) $(js_dst) $(agda_dst) $(styles_dst) $(fonts_dst)
+all: $(md_dst) $(html_dst) $(js_dst) $(agda_dst) $(styles_dst) $(fonts_dst)
 
 $(OUT_DIR)/%.md: $(SRC_DIR)/%.lagda.md
 	$(AGDA) $(AGDA_FLAGS) $<
