@@ -1,0 +1,143 @@
+html {
+  line-height: 1.15;
+  font-size: 80%;
+  font-family: Libertinus Serif, Georgia, serif;
+}
+body {
+  font-size: 1.8em;
+  line-height: 1.76;
+  max-width: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Libertinus Sans, system-ui, sans-serif;
+  letter-spacing: -1px;
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2.4rem;
+}
+h3 {
+  font-size: 2rem;
+}
+pre {
+  font-family: Libertinus Math, Georgia, serif;
+}
+pre a,
+code a {
+  text-decoration: none;
+}
+pre .hover-highlight,
+pre a:link:hover,
+code a:link:hover {
+  background-color: rgb(255, 255, 145) !important;
+}
+
+/* KaTeX Overrides */
+
+header,
+.katex-display,
+.katex-display > .katex {
+  text-align: inherit !important;
+}
+.katex,
+.katex .mathdefault {
+  font-family: Libertinus Math, KaTeX_Main, Georgia, serif !important;
+  font-size: 1em !important;
+}
+
+/* Font Faces */
+
+/* Sans Regular */
+@font-face {
+  font-family: "Libertinus Sans";
+  src: url(fonts/LibertinusSans-Regular.otf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Sans Italic */
+@font-face {
+  font-family: "Libertinus Sans";
+  src: url(fonts/LibertinusSans-Italic.otf);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Sans Bold */
+@font-face {
+  font-family: "Libertinus Sans";
+  src: url(fonts/LibertinusSans-Bold.otf);
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Regular */
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url(fonts/LibertinusSerif-Regular.otf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Semibold */
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url(fonts/LibertinusSerif-Semibold.otf);
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url(fonts/LibertinusSerif-Bold.otf);
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Regular Italic */
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url(fonts/LibertinusSerif-Italic.otf);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Semibold Italic */
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url(fonts/LibertinusSerif-SemiboldItalic.otf);
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Bold Italic */
+@font-face {
+  font-family: "Libertinus Serif";
+  src: url(fonts/LibertinusSerif-BoldItalic.otf);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Math */
+@font-face {
+  font-family: "Libertinus Math";
+  src: url(fonts/LibertinusMath-Regular.otf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Display */
+@font-face {
+  font-family: "Libertinus Display";
+  src: url(fonts/LibertinusSerifDisplay-Regular.otf);
+  font-weight: 400;
+  font-style: normal;
+}
