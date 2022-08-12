@@ -9,12 +9,12 @@
 	"updateRemoteUserUID": false,
 	"onCreateCommand": "nix develop --command echo done building nix dev environment",
 	"extensions": [
-		"arrterian.nix-env-selector",
 		"jnoortheen.nix-ide",
 		"fsevenm.run-it-on",
 		"ms-azuretools.vscode-docker",
 		"yzhang.markdown-all-in-one",
 		"banacorn.agda-mode",
-		"j-mueller.agda"
+		"j-mueller.agda",
+		"mkhl.direnv"
 	]
 }
