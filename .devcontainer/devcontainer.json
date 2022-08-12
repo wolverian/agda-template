@@ -1,0 +1,20 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
+// https://github.com/microsoft/vscode-dev-containers/tree/master/containers/docker-existing-dockerfile
+{
+	"name": "nix-devcontainer",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "dev",
+	"workspaceFolder": "/workspace",
+	"userEnvProbe": "loginShell",
+	"updateRemoteUserUID": false,
+	"onCreateCommand": "nix develop --command echo done building nix dev environment",
+	"extensions": [
+		"arrterian.nix-env-selector",
+		"jnoortheen.nix-ide",
+		"fsevenm.run-it-on",
+		"ms-azuretools.vscode-docker",
+		"yzhang.markdown-all-in-one",
+		"banacorn.agda-mode",
+		"j-mueller.agda"
+	]
+}
