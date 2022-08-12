@@ -1,3 +1,4 @@
 *.agdai
 /_build/
-/html/.direnv/
+/html/
+.direnv/
